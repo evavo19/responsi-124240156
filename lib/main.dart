@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Harry Potter',
+      title: 'Harry Potter Library',
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: messengerKey,
       navigatorKey: navigatorKey,

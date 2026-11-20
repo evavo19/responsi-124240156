@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harry_potter_app/screens/profil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,13 +22,12 @@ class _CharacterPageState extends State<CharacterPage> {
   @override
   void initState() {
     super.initState();
-    _future = ApiService.getCharacters();
+    _future = ApiService.getBooks();
   }
 
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('isLoggedIn');
-
+    await prefs.remove('username');
     if (!mounted) return;
     Navigator.pushAndRemoveUntil(
       context,
@@ -45,13 +45,21 @@ class _CharacterPageState extends State<CharacterPage> {
         backgroundColor: const Color(0xFF1E1B4B),
         foregroundColor: Colors.white,
         title: Text(
-          'Harry Potter Characters',
+          'Harry Potter Books',
           style: GoogleFonts.uncialAntiqua(
             fontSize: 20,
             color: const Color(0xFFFACC15),
           ),
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person, color: Color(0xFFFACC15)),
+            tooltip: 'Profile',
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const ProfilePage()),
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.logout, color: Color(0xFFFACC15)),
             onPressed: _logout,
@@ -89,30 +97,21 @@ class _CharacterPageState extends State<CharacterPage> {
                       color: const Color(0xFF1E293B),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.05),
-                      ),
+                          color: Colors.white.withValues(alpha: 0.05)),
                     ),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
                       leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          c['image'] ?? '',
-                          width: 50,
-                          height: 60,
+                          c['cover'] ?? '',
+                          width: 48,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                            width: 50,
-                            height: 60,
-                            color: Colors.grey[800],
-                            child: const Icon(Icons.person,
-                                color: Color(0xFFFACC15)),
-                          ),
+                          errorBuilder: (_, __, ___) =>
+                              const Icon(Icons.book, color: Color(0xFFFACC15)),
                         ),
                       ),
                       title: Text(
-                        c['fullName'] ?? '-',
+                        c['title'] ?? '-',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -122,7 +121,7 @@ class _CharacterPageState extends State<CharacterPage> {
                       subtitle: Padding(
                         padding: const EdgeInsets.only(top: 4),
                         child: Text(
-                          c['interpretedBy'] ?? '-',
+                          c['releaseDate'] ?? '-',
                           style: const TextStyle(color: Colors.white70),
                         ),
                       ),

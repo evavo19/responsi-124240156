@@ -27,7 +27,6 @@ class FavoriteSpellsPage extends StatelessWidget {
       body: ValueListenableBuilder(
         valueListenable: box.listenable(),
         builder: (context, Box b, _) {
-          // Tampilan saat belum ada spell yang difavoritkan
           if (b.isEmpty) {
             return const Center(
               child: Padding(

@@ -8,7 +8,6 @@ class NotificationService {
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
     await _plugin.initialize(const InitializationSettings(android: android));
 
-    // Android 13+ butuh izin notifikasi saat runtime
     await _plugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
@@ -16,7 +15,6 @@ class NotificationService {
         ?.requestNotificationsPermission();
   }
 
-  // Immediate Notification: langsung tampil saat dipanggil
   static Future<void> showDeleteNotification(String spellName) async {
     const details = NotificationDetails(
       android: AndroidNotificationDetails(
@@ -29,7 +27,7 @@ class NotificationService {
     );
 
     await _plugin.show(
-      DateTime.now().millisecondsSinceEpoch ~/ 1000, // id unik
+      DateTime.now().millisecondsSinceEpoch ~/ 1000, 
       'Delete notification',
       'You deleted $spellName from your fav list!',
       details,

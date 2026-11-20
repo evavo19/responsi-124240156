@@ -17,13 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   final _passC = TextEditingController();
   bool _hidePass = true;
 
-  static const _validUser = 'admin';
-  static const _validPass = '123';
+  static const _validUser = 'eva dewi';
+  static const _validPass = '156';
 
   Future<void> _login() async {
     if (_userC.text == _validUser && _passC.text == _validPass) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('username', _userC.text);
 
       showAppSnackBar('Success!', 'Logged in Successfully', success: true);
       if (!mounted) return;
@@ -52,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Gradient Magis
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Hogwarts Grimoire',
+                    'Harry Potter Library',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.uncialAntiqua(
                       fontSize: 30,

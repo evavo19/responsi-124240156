@@ -67,7 +67,7 @@ class _SpellsPageState extends State<SpellsPage> {
         title: Text(
           'Harry Potter Spells Gallery',
           style: GoogleFonts.uncialAntiqua(
-            fontSize: 19,
+            fontSize: 15,
             color: const Color(0xFFFACC15),
           ),
         ),
@@ -185,7 +185,7 @@ class _SpellsPageState extends State<SpellsPage> {
                     ),
                     onPressed: () => Navigator.pop(context),
                     child: const Text(
-                      'Characters',
+                      'Books',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),

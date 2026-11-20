@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passC = TextEditingController();
   bool _hidePass = true;
 
-  static const _validUser = 'eva dewi';
+  static const _validUser = 'Zakinanda';
   static const _validPass = '156';
 
   Future<void> _login() async {
